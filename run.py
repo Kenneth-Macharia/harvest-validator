@@ -22,7 +22,7 @@ def main():
     farm_data = json.load(open(file_path))
     dv = DataValidator(farm_data)
 
-    # present the validation report
+    # Present the validation report
     print('\n---------------------------------')
     print('| HARVEST DATA VALIDATOR REPORT |')
     print('---------------------------------')
@@ -32,6 +32,9 @@ def main():
     print('\nSubmissions where Dry Weights are greater than Wet Weights')
     print('----------------------------------------------------------')
     print(f'{dv.dry_weight_vs_wet_weight()}')
+    print('\nSubmissions where Dry Weights are outside the Standard Deviation')
+    print('----------------------------------------------------------------')
+    print(f'{dv.dry_weight_std_deviation()}')
 
 
 if __name__ == '__main__':
