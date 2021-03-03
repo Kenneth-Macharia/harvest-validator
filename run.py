@@ -23,11 +23,15 @@ def main():
     dv = DataValidator(farm_data)
 
     # present the validation report
-    print('\n--------------------------------------------------------')
-    print('HARVEST DATA VALIDATOR REPORT')
-    print('--------------------------------------------------------\n')
-    print('*** Submissions with duplicate crop measurements ***')
+    print('\n---------------------------------')
+    print('| HARVEST DATA VALIDATOR REPORT |')
+    print('---------------------------------')
+    print('\nSubmissions with Duplicate Crop Measurements')
+    print('--------------------------------------------')
     print(f'{dv.duplicate_crop_data()}')
+    print('\nSubmissions where Dry Weights are greater than Wet Weights')
+    print('----------------------------------------------------------')
+    print(f'{dv.dry_weight_vs_wet_weight()}')
 
 
 if __name__ == '__main__':

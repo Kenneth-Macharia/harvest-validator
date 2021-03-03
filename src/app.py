@@ -11,7 +11,7 @@ class DataValidator:
         '''This method checks for multiple measurements for the same crop
          in a single farm'''
 
-        seen, duplicates = {}, {}
+        seen, output = {}, {}
 
         for farm in self.input:
             # Check if a particular farm has been previosly parsed
@@ -21,16 +21,23 @@ class DataValidator:
                 # If a farm has already been encountered, check if for this
                 # crop occurence
                 if seen[farm['farm_id']] == farm['crop'] and farm['farm_id'] \
-                        not in duplicates:
-                    duplicates[f'farm_id: {farm["farm_id"]}'] = \
+                        not in output:
+                    output[f'farm_id: {farm["farm_id"]}'] = \
                         f'duplicate crop: {farm["crop"]}'
 
-        return duplicates if duplicates else None
+        return output if output else None
 
     def dry_weight_vs_wet_weight(self):
         '''This method checks whether dry weight measurement exceeds
          the corresponding wet weight measurement'''
-        pass
+
+        output = {}
+
+        for farm in self.input:
+            if farm['dry_weight'] > farm['wet_weight']:
+                output[farm["farm_id"]] = farm["crop"]
+
+        return output if output else None
 
     def dry_weight_std_deviation(self):
         '''This method checks whether the dry weight is outside the
