@@ -3,13 +3,18 @@
 from statistics import stdev, mean
 from geopy.distance import distance
 from itertools import combinations
+from PIL import Image
+from imagehash import average_hash
+from os.path import join
 
 
 class DataValidator:
     '''This class indentifies issues in a provided json data set'''
 
-    def __init__(self, data):
-        self.input = data['harvest_measurements']
+    def __init__(self, crop_data, image_data, images_dir):
+        self.input = crop_data['harvest_measurements']
+        self.image_files = image_data
+        self.image_dir = images_dir
 
     def duplicate_crop_data(self):
         '''This method checks for multiple measurements for the same crop
@@ -87,7 +92,19 @@ class DataValidator:
 
     def duplicate_photo_data(self):
         '''This method checks for duplicate photo submissions'''
-        pass
+
+        resize_matrix, img_hashes, output = 10, {}, {}
+
+        for img_name in self.image_files:
+            with Image.open(join(self.image_dir, img_name)) as img:
+                curr_hash = average_hash(img, resize_matrix)
+
+                if curr_hash not in img_hashes:
+                    img_hashes[curr_hash] = img_name
+                else:
+                    output[img_hashes[curr_hash]] = img_name
+
+        return output if output else None
 
     @staticmethod
     def crop_data_agg(submissions, crop):

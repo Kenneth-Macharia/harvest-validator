@@ -20,13 +20,18 @@ def main():
         exit()
 
     farm_data = load(open(file_path))
-    dv = DataValidator(farm_data)
+
+    # Read in image name list
+    image_list = [p.name for p in Path(dir_path).glob('*.jpg')]
+
+    # initialize validator module
+    dv = DataValidator(farm_data, image_list, dir_path)
 
     # Render the validation report
     print('\n---------------------------------')
     print('| HARVEST DATA VALIDATOR REPORT |')
     print('---------------------------------')
-    print('\nSubmissions with Duplicate Crop Measurements')
+    print('\nSubmissions with Multiple Crop Measurements')
     print('--------------------------------------------')
     print(f'{dv.duplicate_crop_data()}')
     print('\nSubmissions where Dry Weights are greater than Wet Weights')
@@ -35,9 +40,12 @@ def main():
     print('\nSubmissions where Dry Weights are outside the Standard Deviation')
     print('----------------------------------------------------------------')
     print(f'{dv.dry_weight_std_deviation()}')
-    print('\nSubmissions where GPS Coords are within 200 meters of each other')
+    print('\nSubmissions where GPS Coords are within 200 Meters')
     print('----------------------------------------------------------------')
     print(f'{dv.location_check()}')
+    print('\nSubmissions with Duplicate Photos')
+    print('---------------------------------')
+    print(f'{dv.duplicate_photo_data()}')
 
 
 if __name__ == '__main__':
