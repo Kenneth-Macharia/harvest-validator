@@ -1,28 +1,28 @@
 '''The app entry point'''
 
 from pathlib import Path
-from src.app import DataValidator
-import sys
-import json
+from sys import argv, exit
+from json import load
+from src.validator import DataValidator
 
 
 def main():
-    if len(sys.argv) < 2 or not Path(Path(sys.argv[1])).exists():
+    if len(argv) < 2 or not Path(Path(argv[1])).exists():
         print('Provide a valid data directory path argument')
-        sys.exit()
+        exit()
 
-    dir_path = sys.argv[1]
+    dir_path = argv[1]
 
     # Read in the json file data
     file_path = Path(f'{dir_path}/farm_data.json')
     if not file_path.exists():
         print('farm_data.json does not exist')
-        sys.exit()
+        exit()
 
-    farm_data = json.load(open(file_path))
+    farm_data = load(open(file_path))
     dv = DataValidator(farm_data)
 
-    # Present the validation report
+    # Render the validation report
     print('\n---------------------------------')
     print('| HARVEST DATA VALIDATOR REPORT |')
     print('---------------------------------')
@@ -35,6 +35,9 @@ def main():
     print('\nSubmissions where Dry Weights are outside the Standard Deviation')
     print('----------------------------------------------------------------')
     print(f'{dv.dry_weight_std_deviation()}')
+    print('\nSubmissions where GPS Coords are within 200 meters of each other')
+    print('----------------------------------------------------------------')
+    print(f'{dv.location_check()}')
 
 
 if __name__ == '__main__':
