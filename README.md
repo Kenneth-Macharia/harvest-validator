@@ -24,6 +24,7 @@
 3. Activate the virtual environment and install the app dependancies
 
     Unix: `source ./{name_of_your_virtualenv}/bin/activate`
+
     Windows: `source ./{name_of_your_virtualenv}/Scripts/activate`
 
     `pip install -r requirements.txt`
