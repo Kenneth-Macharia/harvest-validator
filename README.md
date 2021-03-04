@@ -9,9 +9,9 @@
     4. Submissions where the GPS coordinates of one farm are within 200 meters of another recorded farm
     5. Submissions where the photo submitted is a duplicate of another photo that was submitted.
 
-## Running tha app
+## How to run the app
 
-1. Clone app repo on a local machine which has python and git installed
+1. Clone this repo on a machine which has python and git installed
 
     `git clone https://github.com/Kenneth-Macharia/harvest-validator.git`
 
@@ -21,11 +21,14 @@
 
     `python -m venv {name_of_your_virtualenv}`
 
-3. Activate the virtualenv and install the app dependancies in it:
+3. Activate the virtual environment and install the app dependancies
 
-    Unix/Linux: `source ./{name_of_your_virtualenv}/bin/activate`
+    Unix: `source ./{name_of_your_virtualenv}/bin/activate`
     Windows: `source ./{name_of_your_virtualenv}/Scripts/activate`
 
     `pip install -r requirements.txt`
 
-4.
+4. Run the app passing the path to the `harvest_data_set` folder as an argument. This
+  folder contained within the repo folder, contains the app test data:
+
+    `python run.py ./harvest_data_set`

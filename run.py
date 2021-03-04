@@ -32,7 +32,7 @@ def main():
     print('| HARVEST DATA VALIDATOR REPORT |')
     print('---------------------------------')
     print('\nSubmissions with Multiple Crop Measurements')
-    print('--------------------------------------------')
+    print('-------------------------------------------')
     print(f'{dv.duplicate_crop_data()}')
     print('\nSubmissions where Dry Weights are greater than Wet Weights')
     print('----------------------------------------------------------')
@@ -41,11 +41,12 @@ def main():
     print('----------------------------------------------------------------')
     print(f'{dv.dry_weight_std_deviation()}')
     print('\nSubmissions where GPS Coords are within 200 Meters')
-    print('----------------------------------------------------------------')
+    print('--------------------------------------------------')
     print(f'{dv.location_check()}')
     print('\nSubmissions with Duplicate Photos')
     print('---------------------------------')
-    print(f'{dv.duplicate_photo_data()}')
+    print(f'{dv.duplicate_photo_data()}\n')
+    print('*********** End of Report ***********\n')
 
 
 if __name__ == '__main__':
