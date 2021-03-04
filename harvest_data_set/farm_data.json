@@ -1,0 +1,60 @@
+{
+    "harvest_measurements": [
+        {
+            "farm_id": "819128",
+            "crop": "sorghum",
+            "location": "-1.1913500507796262, 36.81766792763339",
+            "wet_weight": 21.54,
+            "dry_weight": 13.21
+        },
+        {
+            "farm_id": "8149134",
+            "crop": "wheat",
+            "location": "-1.1618753670185944, 36.81325174130941",
+            "wet_weight": 28.81,
+            "dry_weight": 23.21
+        },
+        {
+            "farm_id": "76111112",
+            "crop": "wheat",
+            "location": "-1.079809736235451, 36.8871736391618",
+            "wet_weight": 19.01,
+            "dry_weight": 17.64
+        },
+        {
+            "farm_id": "914011112",
+            "crop": "wheat",
+            "location": "-1.1471728597288589, 36.85167967440603",
+            "wet_weight": 29.11,
+            "dry_weight": 23.19
+        },
+        {
+            "farm_id": "819128",
+            "crop": "wheat",
+            "location": "-1.1913500507796262, 36.81766792763339",
+            "wet_weight": 42.11,
+            "dry_weight": 33.21
+        },
+        {
+            "farm_id": "12939411",
+            "crop": "wheat",
+            "location": "-1.1258585951680524, 36.89355167019951",
+            "wet_weight": 301.11,
+            "dry_weight": 203.19
+        },
+        {
+            "farm_id": "76111112",
+            "crop": "wheat",
+            "location": "-1.079809736235451, 36.8871736391618",
+            "wet_weight": 22.37,
+            "dry_weight": 19.74
+        },
+        {
+            "farm_id": "91a23192111b",
+            "crop": "sorghum",
+            "location": "-1.1907708187237365, 36.81878372676805",
+            "wet_weight": 41.04,
+            "dry_weight": 42.21
+        }
+    ]
+}
