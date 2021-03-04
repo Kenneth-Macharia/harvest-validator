@@ -1,4 +1,4 @@
-'''The app entry point'''
+'''The application entry point'''
 
 from pathlib import Path
 from sys import argv, exit
@@ -8,21 +8,24 @@ from src.validator import DataValidator
 
 def main():
     if len(argv) < 2 or not Path(Path(argv[1])).exists():
-        print('Provide a valid data directory path argument')
-        exit()
+        exit('''Invalid directory path:
+        Usage: | python run.py <valid_folder_path> | e.g /usr/bin
+        ''')
 
     dir_path = argv[1]
 
     # Read in the json file data
     file_path = Path(f'{dir_path}/farm_data.json')
     if not file_path.exists():
-        print('farm_data.json does not exist')
-        exit()
+        exit('File Not Found: farm_data.json does not exist')
 
     farm_data = load(open(file_path))
 
     # Read in image name list
     image_list = [p.name for p in Path(dir_path).glob('*.jpg')]
+
+    if not image_list:
+        exit('Files Not Found: Valid image files (.jpg) not found in provided data directory')
 
     # initialize validator module
     dv = DataValidator(farm_data, image_list, dir_path)
