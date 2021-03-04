@@ -33,3 +33,10 @@
   folder contained within the repo folder, contains the app test data:
 
     `python run.py ./harvest_data_set`
+
+## Assumptions
+
+- The data always comes in a file called `farm_data.json`
+- All images have a `.jpg` file extension.
+- These resources are in the same unzipped directory always.
+- The data is accurate i.e wrong coordinates or weight data will impact the app output.
