@@ -1,6 +1,8 @@
 '''The harvest data validator module'''
 
 from statistics import stdev, mean
+from geopy.distance import distance
+from itertools import combinations
 
 
 class DataValidator:
@@ -57,7 +59,7 @@ class DataValidator:
             upper_bound = (data['mean'] + data['stdev'])
 
             for weight in data['dry_weight']:
-                if not (lower_bound <= weight <= upper_bound):
+                if not (lower_bound < weight < upper_bound):
                     index = data['dry_weight'].index(weight)
                     output[data['farm_ids'][index]] = crop
 
@@ -66,7 +68,22 @@ class DataValidator:
     def location_check(self):
         '''This method checks whether the GPS coordinates of one farm are
         within 200 meters of another recorded farm'''
-        pass
+
+        output, locs = {}, []
+
+        # prepare a list of locations tuples
+        for farm in self.input:
+            locs.append(tuple([float(x.strip()) for x in farm[
+                'location'].split(',')]))
+
+        # validate the distances between unique locations
+        for loc1, loc2 in combinations(locs, 2):
+            if loc1 != loc2:
+                if distance(loc1, loc2).meters <= 200:
+                    res = DataValidator.loc_farm_match(self.input, loc1, loc2)
+                    output[res[0]] = res[1]
+
+        return output if output else None
 
     def duplicate_photo_data(self):
         '''This method checks for duplicate photo submissions'''
@@ -74,7 +91,7 @@ class DataValidator:
 
     @staticmethod
     def crop_data_agg(submissions, crop):
-        '''This static method generates individual crop data across
+        '''This method generates individual crop data across all
         submissions'''
 
         dry_weights, farm_ids = [], []
@@ -90,3 +107,21 @@ class DataValidator:
             'dry_weight': dry_weights,
             'farm_ids': farm_ids
         }
+
+    @staticmethod
+    def loc_farm_match(submissions, loc1, loc2):
+        '''This method matches farm coordinates to farm id'''
+
+        loc1_id, loc2_id = '', ''
+
+        for farm in submissions:
+            curr_loc = tuple([float(x.strip()) for x in farm[
+                'location'].split(',')])
+
+            if curr_loc == loc1:
+                loc1_id = farm['farm_id']
+
+            elif curr_loc == loc2:
+                loc2_id = farm['farm_id']
+
+        return (loc1_id, loc2_id)
