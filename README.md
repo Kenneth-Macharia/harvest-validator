@@ -11,7 +11,7 @@
 
 ## How to run the app
 
-1. Clone this repo on a machine which has python and git installed
+1. Clone this repo on a machine which has python3 and git installed
 
     `git clone https://github.com/Kenneth-Macharia/harvest-validator.git`
 
@@ -19,7 +19,7 @@
 
     `cd /{path_to_harvest_validator}/harvest_validator`
 
-    `python -m venv {name_of_your_virtualenv}`
+    `python3 -m venv {name_of_your_virtualenv}`
 
 3. Activate the virtual environment and install the app dependancies
 
