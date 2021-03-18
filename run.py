@@ -7,7 +7,7 @@ from src.validator import DataValidator
 
 
 def main():
-    if len(argv) < 2 or not Path(Path(argv[1])).exists():
+    if len(argv) < 2 or not Path(argv[1]).exists():
         exit('''Invalid directory path:
         Usage: | python run.py <valid_folder_path> | e.g /usr/bin
         ''')
@@ -27,7 +27,7 @@ def main():
     if not image_list:
         exit('Files Not Found: Valid image files (.jpg) not found in provided data directory')
 
-    # initialize validator module
+    # Initialize validator module
     dv = DataValidator(farm_data, image_list, dir_path)
 
     # Render the validation report
@@ -49,7 +49,7 @@ def main():
     print('\nSubmissions with Duplicate Photos')
     print('---------------------------------')
     print(f'{dv.duplicate_photo_data()}\n')
-    print('*********** End of Report ***********\n')
+    print('********** End of Report *********\n')
 
 
 if __name__ == '__main__':

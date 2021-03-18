@@ -17,7 +17,7 @@ class DataValidator:
         self.image_dir = images_dir
 
     def duplicate_crop_data(self):
-        """[This method checks for multiple measurements for the same crop
+        """[This method checks for multiple measurements of the same crop
          in a single farm]
 
         Returns:
